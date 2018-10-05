@@ -112,13 +112,14 @@ def display_game(dealer,player,hidden = True):
 
 
 
-input("Ready to play Black Jack. Press any button to start.")
+name = input("Ready to play Black Jack. What is your name?")
+
 money = 100
 
 while True:
     bet = ""
     while not bet.isnumeric():
-        bet = input("Current balance ${}.\nHow much do you want to bet?".format(money))
+        bet = input("Current balance ${}.\nHow much do you want to bet, {}?".format(money,name))
         if(not bet.isnumeric()):
             print("Invalid input. Give an positive whole number.")
         elif int(bet) > money :
@@ -132,8 +133,8 @@ while True:
     #dealers hand
     dealer = Hand(deck.draw(),deck.draw(),"Dealer")
     #players hand
-    player = Hand(deck.draw(),deck.draw(),"Player")
-    
+ #   player = Hand(deck.draw(),deck.draw(),"Player")
+    player = Hand(deck.draw(),deck.draw(),name)   
     display_game(dealer,player)
             
     overtwentyone = False
@@ -176,14 +177,14 @@ while True:
             display_game(dealer,player,False)
             print("Dealer has drawn {} card(s)".format(ncard))
             print("Dealer cards total is over 21.")
-            print("Player Wins. (YAY) You gain double your bet.\n")
+            print("{} Wins. (YAY) You gain double your bet.\n".format(name))
             money += 2*int(bet)
             players_turn = True
         # Player loses condition
         elif player.sum() <= dealer.sum():
             display_game(dealer,player,False)
             print("Dealer has draw {} card(s)".format(ncard))
-            print("Dealer's card total are greater or equal to Player's.")
+            print("Dealer's card total are greater or equal to {}'s.".format(name))
             print("Dealer Wins.")
             players_turn = True
         user_input = ""
@@ -191,7 +192,7 @@ while True:
     if(money > 0):
         user_input = ""
         while user_input != "Y" and user_input != "N":
-            user_input = input("Current balance is {}.\nDo you want to go again[Y/N]".format(money)).upper()
+            user_input = input("{}'s current balance is {}.\nDo you want to go again[Y/N]".format(name,money)).upper()
             if user_input != "Y" and user_input != "N":
                 print("Invalid Response.")
             elif(user_input == "N") :
