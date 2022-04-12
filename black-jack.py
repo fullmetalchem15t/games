@@ -95,7 +95,7 @@ class Hand():
                     stdout.write("(or {})".format(total-10*(i+1)))
             print("")
             if n_ace > 0:
-                print("You many have multiple scores because your hand has one or more ace in it.")
+                print("You have multiple scores because your hand has one or more ace in it.")
                 print("Highest score below 22 will always be chosen.")
         elif(hidden == False):
             print("\nsum = {}".format(self.sum()))      
